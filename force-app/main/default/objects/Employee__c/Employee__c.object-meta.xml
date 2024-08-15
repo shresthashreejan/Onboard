@@ -156,8 +156,9 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>Employee</label>
     <nameField>
-        <label>Name</label>
-        <type>Text</type>
+        <displayFormat>EMP-{00000}</displayFormat>
+        <label>Record Number</label>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Employees</pluralLabel>
     <searchLayouts></searchLayouts>

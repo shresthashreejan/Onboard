@@ -156,8 +156,9 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>Department</label>
     <nameField>
-        <label>Name</label>
-        <type>Text</type>
+        <displayFormat>DEP-{00000}</displayFormat>
+        <label>Record Number</label>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Departments</pluralLabel>
     <searchLayouts></searchLayouts>
