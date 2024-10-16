@@ -156,9 +156,8 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>Assessment</label>
     <nameField>
-        <displayFormat>AMT-{00000}</displayFormat>
-        <label>Record Number</label>
-        <type>AutoNumber</type>
+        <label>Name</label>
+        <type>Text</type>
     </nameField>
     <pluralLabel>Assessments</pluralLabel>
     <searchLayouts></searchLayouts>
