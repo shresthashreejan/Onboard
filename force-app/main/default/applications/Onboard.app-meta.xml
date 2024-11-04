@@ -19,5 +19,4 @@
     <tabs>Resource__c</tabs>
     <tabs>Template__c</tabs>
     <uiType>Lightning</uiType>
-    <utilityBar>Onboard_UtilityBar</utilityBar>
 </CustomApplication>
