@@ -1,9 +1,11 @@
 <template>
-    <lightning-file-upload
-        name="fileUploader"
-        accept={validFormats}
-        record-id={recordId}
-        onuploadfinished={handleUpload}
-    >
-    </lightning-file-upload>
+    <section class="slds-grid slds-grid_align-center slds-grid_vertical-align-center slds-p-around_medium">
+        <lightning-file-upload
+            name="fileUploader"
+            accept={validFormats}
+            record-id={recordId}
+            onuploadfinished={handleUpload}
+        >
+        </lightning-file-upload>
+    </section>
 </template>
