@@ -44,4 +44,4 @@ $RECYCLE.BIN/
 **/.venv/
 **/venv/
 
-design
+.ignore

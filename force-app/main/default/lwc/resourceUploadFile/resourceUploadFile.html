@@ -1,11 +1,16 @@
 <template>
-    <section class="slds-grid slds-grid_align-center slds-grid_vertical-align-center slds-p-around_medium">
-        <lightning-file-upload
-            name="fileUploader"
-            accept={validFormats}
-            record-id={recordId}
-            onuploadfinished={handleUpload}
-        >
-        </lightning-file-upload>
-    </section>
+    <lightning-modal-header class="slds-text-heading_medium">
+        Upload File
+    </lightning-modal-header>
+    <lightning-modal-body>
+        <section class="slds-grid slds-grid_align-center slds-grid_vertical-align-center slds-p-around_medium">
+            <lightning-file-upload
+                name="fileUploader"
+                accept={validFormats}
+                record-id={recordId}
+                onuploadfinished={handleUpload}
+            >
+            </lightning-file-upload>
+        </section>
+    </lightning-modal-body>
 </template>
