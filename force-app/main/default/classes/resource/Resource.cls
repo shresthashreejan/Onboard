@@ -2,6 +2,10 @@
  * @description Class for operations related to resource object.
  */
 public with sharing class Resource {
+
+    // Constants
+    public static String OBJECT_API_NAME = 'Resource__c';
+
     /**
      * @description Method to commit file upload changes on resource record.
      */

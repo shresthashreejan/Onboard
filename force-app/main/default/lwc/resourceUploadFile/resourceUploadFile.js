@@ -1,5 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { CloseActionScreenEvent } from 'lightning/actions';
 import commitUploadChanges from '@salesforce/apex/Resource.commitUploadChanges';
 
 export default class ResourceUploadFile extends LightningElement {
@@ -20,6 +21,9 @@ export default class ResourceUploadFile extends LightningElement {
         })
         .catch((error) => {
             this.showToast('Error', error.body.message || 'An error occurred while uploading the file.', 'error');
+        })
+        .finally(() => {
+            this.closeModal();
         });
     }
 
@@ -30,5 +34,9 @@ export default class ResourceUploadFile extends LightningElement {
             variant: variant,
         });
         this.dispatchEvent(event);
+    }
+
+    closeModal() {
+        this.dispatchEvent(new CloseActionScreenEvent());
     }
 }
