@@ -107,16 +107,6 @@
                 <identifier>RecordOwnerIdField</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.File_Name__c</fieldItem>
-                <identifier>RecordFile_Name_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-90fdc301-7681-423f-9a8f-1ee469296c32</name>
         <type>Facet</type>
     </flexiPageRegions>

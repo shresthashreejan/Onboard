@@ -12,8 +12,7 @@ public with sharing class Resource {
     @AuraEnabled
     public static void commitUploadChanges(Id recordId, String fileName) {
         try {
-            Resource__c rsc = [SELECT Id, File_Name__c, File_Linked__c FROM Resource__c WHERE Id =: recordId];
-            rsc.File_Name__c = fileName;
+            Resource__c rsc = [SELECT Id, File_Linked__c FROM Resource__c WHERE Id =: recordId];
             rsc.File_Linked__c = true;
             update rsc;
         } catch (Exception e) {
