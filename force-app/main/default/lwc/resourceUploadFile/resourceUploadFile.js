@@ -14,7 +14,7 @@ export default class ResourceUploadFile extends LightningElement {
     handleUpload(event) {
         commitUploadChanges({
             recordId: this.recordId, 
-            fileName: event.detail.files[0].name
+            contentId: event.detail.files[0].documentId
         })
         .then(() => {
             this.showToast('Success', 'File uploaded successfully.', 'success');
