@@ -290,6 +290,13 @@
             <componentInstance>
                 <componentName>viewResource</componentName>
                 <identifier>c_viewResource</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.File_Linked__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>true</rightValue>
+                    </criteria>
+                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
