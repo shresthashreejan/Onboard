@@ -4,5 +4,6 @@
 public with sharing class EmployeeTriggerHandler {
     public void onAfterInsert(List<Employee__c> employees){
         Employee.createUsersForEmployees(employees);
+        Employee.assignResourcesBasedOnRole(employees);
     }
 }

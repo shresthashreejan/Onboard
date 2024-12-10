@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Intern</fullName>
+        <default>false</default>
+        <label>Intern</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Intern</fullName>
+        <default>false</default>
+        <label>QA Intern</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Lead</fullName>
+        <default>false</default>
+        <label>QA Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>QA Trainee</fullName>
+        <default>false</default>
+        <label>QA Trainee</label>
+    </customValue>
+    <customValue>
+        <fullName>Quality Analyst</fullName>
+        <default>false</default>
+        <label>Quality Analyst</label>
+    </customValue>
+    <customValue>
+        <fullName>Senior Software Engineer</fullName>
+        <default>false</default>
+        <label>Senior Software Engineer</label>
+    </customValue>
+    <customValue>
+        <fullName>Software Engineer</fullName>
+        <default>false</default>
+        <label>Software Engineer</label>
+    </customValue>
+    <customValue>
+        <fullName>Team Lead</fullName>
+        <default>false</default>
+        <label>Team Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>Trainee</fullName>
+        <default>false</default>
+        <label>Trainee</label>
+    </customValue>
+    <description>Global picklist value set for Employee roles.</description>
+    <masterLabel>Roles</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>
