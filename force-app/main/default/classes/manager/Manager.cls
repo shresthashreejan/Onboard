@@ -10,12 +10,14 @@ public with sharing class Manager {
         Id profileId = [SELECT Id FROM Profile WHERE Name = 'Standard Platform User' WITH SECURITY_ENFORCED].Id;
 
         for(Manager__c manager : managers) {
+            // Truncating first name to 8 characters for alias
+            String alias = manager.First_Name__c.length() > 8 ? manager.First_Name__c.substring(0, 8) : manager.First_Name__c;
             users.add(new User(
                 Username = manager.Email__c,
                 Email = manager.Email__c,
                 FirstName = manager.First_Name__c,
                 LastName = manager.Last_Name__c,
-                Alias = manager.First_Name__c,
+                Alias = alias,
                 CommunityNickname = manager.Email__c,
                 TimeZoneSidKey = 'America/Los_Angeles',
                 LocaleSidKey = 'en_US',
