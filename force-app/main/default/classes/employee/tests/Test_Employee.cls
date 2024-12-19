@@ -55,9 +55,11 @@ public class Test_Employee {
 
         Test.startTest();
         try {
+            // ACT: Assign resource and update employee record
             employee.Resource__c = resource.Id;
             update employee;
         } catch (DmlException e) {
+            // ASSERT: Ensure error message is not null
             System.assertEquals(true, e != null, 'Error should not be null.');
         }
         Test.stopTest();
