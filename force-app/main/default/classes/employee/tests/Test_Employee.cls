@@ -11,7 +11,6 @@ public class Test_Employee {
     static void setupData(){
         Test_Employee_Factory factory = new Test_Employee_Factory();
         factory.insertEmployee();
-        factory.createEmployeeWithManagerAndResource();
     }
 
     /**
@@ -33,35 +32,5 @@ public class Test_Employee {
         System.assertEquals(employee.First_Name__c, user.FirstName, 'First names should match.');
         System.assertEquals(employee.Last_Name__c, user.LastName, 'Last names should match.');
         System.assertEquals(employee.Email__c, user.Email, 'Email addresses should match.');
-    }
-
-    /**
-     * @description givenEmployee_WhenUnauthorizedUserAssignsResource_ThenErrorShouldBeThrown
-     * GIVEN: Employee record
-     * WHEN: Unauthorized user assigns resource to an employee
-     * THEN: Validation error should be thrown
-     */
-    @isTest
-    public static void givenEmployee_WhenUnauthorizedUserAssignsResource_ThenErrorShouldBeThrown() {
-        
-        //ARRANGE: Setup error message string
-        String errorMsg = 'You are unauthorized to assign resource to this employee.';
-
-        // ARRANGE: Query created employee
-        Employee__c employee = [SELECT Id, First_Name__c, Last_Name__c, Email__c, Resource__c, Manager__c FROM Employee__c WHERE First_Name__c = 'createEmployeeWithManagerAndResource'];
-
-        // ARRANGE: Query content document
-        Resource__c resource = [SELECT Id FROM Resource__c WHERE Name = 'createEmployeeWithManagerAndResource'];
-
-        Test.startTest();
-        try {
-            // ACT: Assign resource and update employee record
-            employee.Resource__c = resource.Id;
-            update employee;
-        } catch (DmlException e) {
-            // ASSERT: Ensure error message is not null
-            System.assertEquals(true, e != null, 'Error should not be null.');
-        }
-        Test.stopTest();
     }
 }

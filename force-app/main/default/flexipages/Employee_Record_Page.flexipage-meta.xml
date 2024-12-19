@@ -95,16 +95,6 @@
                 <identifier>RecordRole_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Resource__c</fieldItem>
-                <identifier>RecordResource_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-fb032d23-63f9-413a-b85a-f46f77089f45</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -147,16 +137,6 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Department__c</fieldItem>
                 <identifier>RecordDepartment_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Senior__c</fieldItem>
-                <identifier>RecordSenior_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-c16a493c-a813-45ad-93bf-768770a1a8de</name>

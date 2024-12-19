@@ -93,6 +93,18 @@
                 <identifier>RecordDescription_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Role__c</fieldItem>
+                <identifier>RecordRole__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.Department__c</fieldItem>
+                <identifier>RecordDepartment__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-7af9cc60-7991-4cbc-af89-2157108fa08c</name>
         <type>Facet</type>
     </flexiPageRegions>

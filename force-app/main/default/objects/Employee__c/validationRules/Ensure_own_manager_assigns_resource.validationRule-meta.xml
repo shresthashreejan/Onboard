@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Ensure_own_manager_assigns_resource</fullName>
-    <active>true</active>
-    <description>Rule to ensure only employee&apos;s own manager assigns resource.</description>
-    <errorConditionFormula>AND(ISCHANGED(Resource__c), $User.Id &lt;&gt; Manager__r.User__c)</errorConditionFormula>
-    <errorMessage>You are not authorized to assign resource to this employee.</errorMessage>
-</ValidationRule>
