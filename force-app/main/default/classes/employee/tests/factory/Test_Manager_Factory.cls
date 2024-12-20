@@ -11,7 +11,7 @@ public class Test_Manager_Factory {
         Manager__c manager = new Manager__c(
             First_Name__c = 'insertManager',
             Last_Name__c = '0',
-            Email__c = 'inserManager@insertManager.com'
+            Email__c = 'manager001@email.com'
         );
         insert manager;
     }
