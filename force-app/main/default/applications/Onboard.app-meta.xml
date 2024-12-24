@@ -17,6 +17,5 @@
     <tabs>Manager__c</tabs>
     <tabs>Assessment__c</tabs>
     <tabs>Resource__c</tabs>
-    <tabs>Template__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

@@ -99,11 +99,6 @@
         <field>Resource__c.Description__c</field>
         <readable>true</readable>
     </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Template__c.Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
     <label>HR</label>
     <objectPermissions>
@@ -151,15 +146,6 @@
         <object>Resource__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Template__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
     <tabSettings>
         <tab>Assessment__c</tab>
         <visibility>Visible</visibility>
@@ -178,10 +164,6 @@
     </tabSettings>
     <tabSettings>
         <tab>Resource__c</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
-    <tabSettings>
-        <tab>Template__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
 </PermissionSet>
