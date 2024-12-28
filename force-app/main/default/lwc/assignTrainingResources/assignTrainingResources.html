@@ -1,0 +1,53 @@
+<template>
+    <lightning-modal-header label="Assign Training Resources"></lightning-modal-header>
+    <lightning-modal-body>
+        <section class="search-bar">
+            <div class="slds-form-element">
+                <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left-right">
+                    <svg class="slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#search"></use>
+                    </svg>
+                    <input type="text" id="text-input-id-47" placeholder="Search Resources..." class="slds-input" />
+                    <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Clear">
+                        <svg class="slds-button__icon slds-icon-text-light" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#clear"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Clear</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section class="role-specific-resources slds-grid slds-wrap">
+            <lightning-checkbox-group 
+                name="roleSpecificResources"
+                label={roleSpecificLabel}
+                options={roleSpecificOptions}
+                value={roleSpecificValues}
+                onchange={handleRoleSpecificChange}>
+            </lightning-checkbox-group>
+        </section>
+        <section class="general-resources">
+            <lightning-checkbox-group 
+                name="generalResources"
+                label={generalResourcesLabel}
+                options={generalOptions}
+                value={generalValues}
+                onchange={handleGeneralChange}>
+            </lightning-checkbox-group>
+        </section>
+        <p>Selected Values are: {selectedValues}</p>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button
+            class="slds-button"
+            variant="neutral"
+            label="Cancel"
+            onclick={closeModal}
+        ></lightning-button>
+        <lightning-button
+            class="slds-button slds-m-left_x-small"
+            variant="brand"
+            label="Assign"
+        ></lightning-button>
+    </lightning-modal-footer>
+</template>
