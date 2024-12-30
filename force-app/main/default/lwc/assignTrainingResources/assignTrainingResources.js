@@ -1,8 +1,38 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, wire, api } from 'lwc';
+import { getRecord } from 'lightning/uiRecordApi';
+import fetchResources from '@salesforce/apex/ResourceController.fetchResources';
+
+const FIELDS = [
+    'Employee__c.Department__c',
+    'Employee__c.Role__c'
+];
 
 export default class AssignTrainingResource extends LightningElement {
+    
+    @api recordId;
+
     roleSpecificValues = [];
     generalValues = [];
+
+    employeeData;
+
+    @wire(getRecord, {recordId : '$recordId', fields: FIELDS})
+    wiredGetRecord ({error, data}){
+        if (data) {
+            console.log(data);
+        } else if (error) {
+            console.error(error);
+        }
+    }
+
+    fetchRelatedResources(department, role) {
+        fetchResources({
+            department: department,
+            role: role
+        }).then((result) => {
+            console.log(result);
+        }).catch((error) => console.error(error));
+    }
 
     get roleSpecificLabel() {
         return 'Resources for Interns';
