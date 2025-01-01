@@ -1,6 +1,9 @@
 import { LightningElement, wire, api } from 'lwc';
 import { getRecord } from 'lightning/uiRecordApi';
-import fetchResources from '@salesforce/apex/ResourceController.fetchResources';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { CloseActionScreenEvent } from 'lightning/actions';
+import fetchResources from '@salesforce/apex/Resource.fetchResources';
+import assignResources from '@salesforce/apex/TrainingResource.assignResources';
 
 const FIELDS = [
     'Employee__c.Department__c',
@@ -13,13 +16,15 @@ export default class AssignTrainingResource extends LightningElement {
 
     roleSpecificValues = [];
     generalValues = [];
-
+    selectedValues = [];
     employeeData;
+    dataLoaded;
 
     @wire(getRecord, {recordId : '$recordId', fields: FIELDS})
     wiredGetRecord ({error, data}){
         if (data) {
-            console.log(data);
+            this.employeeData = data;
+            this.fetchRelatedResources(data.fields?.Department__c?.value, data.fields?.Role__c?.value);
         } else if (error) {
             console.error(error);
         }
@@ -29,13 +34,24 @@ export default class AssignTrainingResource extends LightningElement {
         fetchResources({
             department: department,
             role: role
-        }).then((result) => {
-            console.log(result);
+        }).then((data) => {
+            if (data) {
+                this.dataLoaded = true;
+                this.roleSpecificValues = [];
+                this.generalValues = [];
+                data.roleSpecified.forEach(rsc => {
+                    this.roleSpecificValues.push({id: rsc.Id, label: rsc.Name});
+                });
+                data.general.forEach(rsc => {
+                    this.generalValues.push({id: rsc.Id, label: rsc.Name});
+                })
+            }
+            
         }).catch((error) => console.error(error));
     }
 
     get roleSpecificLabel() {
-        return 'Resources for Interns';
+        return 'Resources for ' + this.employeeData.fields?.Role__c?.value;
     }
 
     get generalResourcesLabel() {
@@ -43,30 +59,51 @@ export default class AssignTrainingResource extends LightningElement {
     }
 
     get roleSpecificOptions() {
-        return [
-            { label: 'Resource001', value: 'Resource001' },
-            { label: 'Resource002', value: 'Resource002' },
-            { label: 'Resource003', value: 'Resource003' }
-        ];
+        return this.roleSpecificValues.map(rsc => ({
+            label: rsc.label,
+            value: rsc.id
+        }));
     }
 
     get generalOptions() {
-        return [
-            { label: 'Resource004', value: 'Resource004' },
-            { label: 'Resource005', value: 'Resource005' },
-            { label: 'Resource006', value: 'Resource006' }
-        ];
+        return this.generalValues.map(rsc => ({
+            label: rsc.label,
+            value: rsc.id
+        }));
     }
 
     get selectedValues() {
-        return [...this.roleSpecificValues, ...this.generalValues].join(', ');
+        return this.selectedValues.join(', ');
     }
 
-    handleRoleSpecificChange(event) {
-        this.roleSpecificValues = event.detail.value;
+    handleSelection(event) {
+        this.selectedValues = event.detail.value;
     }
 
-    handleGeneralChange(event) {
-        this.generalValues = event.detail.value;
+    handleAssign() {
+        if(this.selectedValues) {
+            assignResources({
+                employeeId: this.recordId,
+                resourceIds: this.selectedValues
+            }).then(() => {
+                this.showToast('Success', 'Selected resources assigned successfully.', 'success');
+                this.closeModal();
+            }).catch((error) => {
+                this.showToast('Error', error.body.message || 'An error occurred while assigning resources.', 'error');
+            });
+        }
+    }
+
+    showToast(title, message, variant) {
+        const event = new ShowToastEvent({
+            title: title,
+            message: message,
+            variant: variant,
+        });
+        this.dispatchEvent(event);
+    }
+
+    closeModal() {
+        this.dispatchEvent(new CloseActionScreenEvent());
     }
 }
