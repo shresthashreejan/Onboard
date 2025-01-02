@@ -31,4 +31,29 @@ public with sharing class TrainingResource {
             throw new AuraHandledException(e.getMessage());
         }
     }
+
+    /**
+     * @description Method to prevent duplicate resource assignment
+     * @param trainingResources holds Training_Resource__c records
+     */
+    public static void preventDuplicateResourceAssignment(List<Training_Resource__c> trainingResources) {
+
+        Set<Id> employeeIds = new Set<Id>();
+        for(Training_Resource__c rsc : trainingResources) {
+            employeeIds.add(rsc.Employee__c);
+        }
+
+        Set<String> existingAssignments = new Set<String>();
+        List<Training_Resource__c> queriedResources = [SELECT Id, Employee__c, Resource__c FROM Training_Resource__c WHERE Employee__c IN: employeeIds];
+        for(Training_Resource__c rsc : queriedResources) {
+            existingAssignments.add(rsc.Employee__c + ':' + rsc.Resource__c);
+        }
+
+        for(Training_Resource__c rsc : trainingResources) {
+            String key = rsc.Employee__c + ':' + rsc.Resource__c;
+            if(existingAssignments.contains(key)) {
+                rsc.addError('Resource is already assigned.');
+            }
+        }
+    }
 }

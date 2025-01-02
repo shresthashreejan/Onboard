@@ -1,10 +1,10 @@
 <template>
     <lightning-modal-header label="Assign Training Resources"></lightning-modal-header>
     <lightning-modal-body class="modal-body">
-        <section if:true={dataLoaded}>
-            <lightning-input type="text" label="Search Resources..." onchange={filterResources}></lightning-input>
+        <section if:true={showPopup}>
+            <lightning-input type="text" label="Search Resources" onchange={filterResources}></lightning-input>
             <section if:true={hasFilteredRoleValues} class="role-specific-resources slds-p-around_small">
-                <h1 class="slds-text-heading_small">Resources for {role}</h1>
+                <h1 class="slds-text-heading_small">Resources for {employeeData.fields.Role__c.value}</h1>
                 <lightning-checkbox-group 
                     name="roleSpecificResources"
                     options={roleSpecificOptions}
