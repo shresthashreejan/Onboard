@@ -10,20 +10,26 @@ const FIELDS = [
     'Employee__c.Role__c'
 ];
 
-export default class AssignTrainingResource extends LightningElement {
+export default class AssignTrainingResources extends LightningElement {
     
     @api recordId;
 
     roleSpecificValues = [];
     generalValues = [];
+    filteredRoleSpecificValues = [];
+    filteredGeneralValues = [];
+    roleSpecificSelections = [];
+    generalSelections = [];
     selectedValues = [];
     employeeData;
     dataLoaded;
+    role;
 
     @wire(getRecord, {recordId : '$recordId', fields: FIELDS})
     wiredGetRecord ({error, data}){
         if (data) {
             this.employeeData = data;
+            this.role = this.employeeData.fields?.Role__c?.value;
             this.fetchRelatedResources(data.fields?.Department__c?.value, data.fields?.Role__c?.value);
         } else if (error) {
             console.error(error);
@@ -44,43 +50,51 @@ export default class AssignTrainingResource extends LightningElement {
                 });
                 data.general.forEach(rsc => {
                     this.generalValues.push({id: rsc.Id, label: rsc.Name});
-                })
+                });
+                this.filteredRoleSpecificValues = this.roleSpecificValues;
+                this.filteredGeneralValues = this.generalValues;
             }
             
         }).catch((error) => console.error(error));
     }
 
-    get roleSpecificLabel() {
-        return 'Resources for ' + this.employeeData.fields?.Role__c?.value;
-    }
-
-    get generalResourcesLabel() {
-        return 'General Resources';
-    }
-
     get roleSpecificOptions() {
-        return this.roleSpecificValues.map(rsc => ({
-            label: rsc.label,
-            value: rsc.id
+            return this.filteredRoleSpecificValues.map(rsc => ({
+                label: rsc.label,
+                value: rsc.id
         }));
     }
 
     get generalOptions() {
-        return this.generalValues.map(rsc => ({
-            label: rsc.label,
-            value: rsc.id
-        }));
+            return this.filteredGeneralValues.map(rsc => ({
+                label: rsc.label,
+                value: rsc.id
+            }));
     }
 
-    get selectedValues() {
+    get selectedOptions() {
+        this.selectedValues = [...this.roleSpecificSelections, ...this.generalSelections];
         return this.selectedValues.join(', ');
     }
 
-    handleSelection(event) {
-        this.selectedValues = event.detail.value;
+    get hasFilteredRoleValues() {
+        return this.filteredRoleSpecificValues.length !== 0;
+    }
+
+    get hasFilteredGeneralValues() {
+        return this.filteredGeneralValues.length !== 0;
+    }
+
+    handleRoleSpecificSelection(event) {
+        this.roleSpecificSelections = event.detail.value;
+    }
+
+    handleGeneralSelection(event) {
+        this.generalSelections = event.detail.value;
     }
 
     handleAssign() {
+        this.selectedValues = [...this.roleSpecificSelections, ...this.generalSelections];
         if(this.selectedValues) {
             assignResources({
                 employeeId: this.recordId,
@@ -92,6 +106,20 @@ export default class AssignTrainingResource extends LightningElement {
                 this.showToast('Error', error.body.message || 'An error occurred while assigning resources.', 'error');
             });
         }
+    }
+
+    filterResources(event) {
+        let searchString = event.detail.value.toLowerCase();
+        if(searchString == '') {
+            this.filteredRoleSpecificValues = this.roleSpecificValues;
+            this.filteredGeneralValues = this.generalValues;
+        }
+        this.filteredRoleSpecificValues = this.roleSpecificValues.filter(resource => 
+            resource.label.toLowerCase().includes(searchString)
+        );
+        this.filteredGeneralValues = this.generalValues.filter(resource => 
+            resource.label.toLowerCase().includes(searchString)
+        );
     }
 
     showToast(title, message, variant) {

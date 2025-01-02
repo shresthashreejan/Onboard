@@ -46,7 +46,7 @@ public with sharing class Resource {
             List<Resource__c> roleSpecifiedResources = new List<Resource__c>();
             List<Resource__c> generalResources = new List<Resource__c>();
             
-            List<Resource__c> resources = [SELECT Id, Name, Role__c FROM Resource__c WHERE Department__c =: department LIMIT 10];
+            List<Resource__c> resources = [SELECT Id, Name, Role__c FROM Resource__c WHERE Department__c =: department AND File_Linked__c = true];
             for(Resource__c resource : resources) {
                 if(!String.isEmpty(role) && resource.Role__c == role){
                     roleSpecifiedResources.add(resource);
