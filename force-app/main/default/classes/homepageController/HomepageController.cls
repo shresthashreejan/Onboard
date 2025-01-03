@@ -10,7 +10,7 @@ public with sharing class HomepageController {
     @AuraEnabled
     public static List<Training_Resource__c> fetchTrainingResources(Id employeeId){
         try {
-            List<Training_Resource__c> trainingResources = [SELECT Id, Employee__c, Resource__c FROM Training_Resource__c WHERE Employee__c =: employeeId];
+            List<Training_Resource__c> trainingResources = [SELECT Id, Employee__c, Resource__c, Resource__r.Name FROM Training_Resource__c WHERE Employee__c =: employeeId];
             return trainingResources;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());

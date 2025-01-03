@@ -12,10 +12,10 @@
     <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
     <label>Onboard</label>
     <navType>Standard</navType>
+    <tabs>Home</tabs>
     <tabs>Department__c</tabs>
     <tabs>Employee__c</tabs>
     <tabs>Manager__c</tabs>
-    <tabs>Assessment__c</tabs>
     <tabs>Resource__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>
