@@ -1,0 +1,17 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" controller="TrainingResource">
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="contentId" type="String"/>
+    <aura:attribute name="resourceName" type="String"/>
+    <aura:attribute name="toastTitle" type="String"/>
+    <aura:attribute name="toastType" type="String"/>
+    <aura:attribute name="toastMessage" type="String"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+
+    <aura:if isTrue="{!not(empty(v.contentId))}">
+        <section class="preview-component slds-box">
+            <c:previewFile contentId="{!v.contentId}" description="{!v.resourceName}"/>
+            <lightning:button variant="brand" label="Complete" title="Complete" onclick="{!c.handleComplete}" />
+        </section>
+    </aura:if>
+</aura:component>

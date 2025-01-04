@@ -56,4 +56,37 @@ public with sharing class TrainingResource {
             }
         }
     }
+
+    /**
+     * @description Method to return resource record's content id
+     * @param recordId holds training resource record id
+     * @return content id in string format
+     */
+    @AuraEnabled
+    public static Map<String, String> fetchContentId(Id recordId){
+        try {
+            Training_Resource__c rsc = [SELECT Id, Resource__r.Name, Resource__r.Content_Id__c FROM Training_Resource__c WHERE Id =: recordId];
+            return new Map<String, String> {
+                'name' => rsc.Resource__r.Name,
+                'contentId' => rsc.Resource__r.Content_Id__c
+            };
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    /**
+     * @description Method to complete training resource
+     * @param recordId holds training resource record id
+     */
+    @AuraEnabled
+    public static void completeTraining(Id recordId) {
+        try {
+            Training_Resource__c rsc = [SELECT Id, Complete__c FROM Training_Resource__c WHERE Id =: recordId];
+            rsc.Complete__c = true;
+            update rsc;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
 }
