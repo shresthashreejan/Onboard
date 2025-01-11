@@ -1,5 +1,5 @@
 import { LightningElement, wire } from 'lwc';
-import fetchList from '@salesforce/apex/HomepageController.fetchList';
+import fetchList from '@salesforce/apex/HomeController.fetchList';
 
 export default class Home extends LightningElement {
     @wire(fetchList)

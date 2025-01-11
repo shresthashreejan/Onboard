@@ -11,13 +11,13 @@ public with sharing class HomeController {
         List<SObject> response = new List<SObject>();
         Id currentUserId = UserInfo.getUserId();
 
-        Employee__c employee = [SELECT Id FROM Employee__c WHERE User_Id__c = :currentUserId];
-        Manager__c manager = [SELECT Id FROM Manager__c WHERE User_Id__c = :currentUserId];
+        Map<Id, Employee__c> employeeMap = new Map<Id, Employee__c>([SELECT Id FROM Employee__c WHERE User_Id__c = :currentUserId LIMIT 1]);
+        Map<Id, Manager__c> managerMap = new Map<Id, Manager__c>([SELECT Id FROM Manager__c WHERE User_Id__c = :currentUserId LIMIT 1]);
 
-        if(employee != null) {
-            response = (List<SObject>) fetchTrainingResources(employee.Id);
-        } else if(manager != null) {
-            response = (List<SObject>) fetchEmployees(manager.Id);
+        if (!employeeMap.isEmpty()) {
+            response = fetchTrainingResources(employeeMap.keySet().iterator().next());
+        } else if (!managerMap.isEmpty()) {
+            response = fetchEmployees(managerMap.keySet().iterator().next());
         }
         
         return response;
@@ -30,7 +30,7 @@ public with sharing class HomeController {
      */
     public static List<Training_Resource__c> fetchTrainingResources(Id employeeId){
         try {
-            return [SELECT Id, Employee__c, Resource__c, Resource__r.Name FROM Training_Resource__c WHERE Employee__c =: employeeId];
+            return [SELECT Id, Resource__c, Resource__r.Name FROM Training_Resource__c WHERE Employee__c =: employeeId];
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
