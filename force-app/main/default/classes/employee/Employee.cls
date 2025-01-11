@@ -1,5 +1,5 @@
 /**
- * @description Class for operations related to the employee object.
+ * @description Class for operations related to the employee object
  */
 public with sharing class Employee {
     /**

@@ -20,7 +20,7 @@ public class Utility {
      * @description Generic method to create and link users to parent record.
      */
     public static void createUsersForEntities(List<SObject> entities, String profileName) {
-        List<User> users = new List<User>();
+        List<Schema.User> users = new List<Schema.User>();
         Map<String, String> firstNameAndAddress = new Map<String, String>();
         Id profileId = [SELECT Id FROM Profile WHERE Name = :profileName WITH SECURITY_ENFORCED].Id;
     
@@ -32,7 +32,7 @@ public class Utility {
             // Truncate first name to 8 characters for alias
             String alias = firstName.length() > 8 ? firstName.substring(0, 8) : firstName;
     
-            users.add(new User(
+            users.add(new Schema.User(
                 Username = email,
                 Email = email,
                 FirstName = firstName,

@@ -40,7 +40,7 @@ public class Test_Employee {
         insert employee;
 
         // ASSERT: Ensure user record is created for the employee
-        User user = [SELECT Id, Email, FirstName, LastName FROM User WHERE FirstName = :employee.First_Name__c AND Email = :employee.Email__c WITH SECURITY_ENFORCED];
+        Schema.User user = [SELECT Id, Email, FirstName, LastName FROM User WHERE FirstName = :employee.First_Name__c AND Email = :employee.Email__c WITH SECURITY_ENFORCED];
         System.assertNotEquals(null, user, 'User should be created for the employee.');
         System.assertEquals(employee.First_Name__c, user.FirstName, 'First names should match.');
         System.assertEquals(employee.Last_Name__c, user.LastName, 'Last names should match.');

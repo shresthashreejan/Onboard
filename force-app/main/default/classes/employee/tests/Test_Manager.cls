@@ -25,7 +25,7 @@ public class Test_Manager {
         Manager__c manager = [SELECT Id, First_Name__c, Last_Name__c FROM Manager__c WHERE First_Name__c = 'insertManager' WITH SECURITY_ENFORCED];
 
         // ARRANGE: Query user record
-        User user = [SELECT Id, Email, FirstName, LastName FROM User WHERE FirstName = :manager.First_Name__c WITH SECURITY_ENFORCED];
+        Schema.User user = [SELECT Id, Email, FirstName, LastName FROM User WHERE FirstName = :manager.First_Name__c WITH SECURITY_ENFORCED];
 
         // ASSERT: Ensure user record is created for the manager
         System.assertNotEquals(null, user, 'User should be created for the manager.');
