@@ -21,8 +21,8 @@ export default class AssignTrainingResources extends LightningElement {
     generalValues;
     filteredRoleSpecificValues;
     filteredGeneralValues;
-    roleSpecificSelections;
-    generalSelections;
+    roleSpecificSelections = [];
+    generalSelections = [];
 
     @wire(getRecord, {recordId : '$recordId', fields: FIELDS})
     wiredGetRecord ({error, data}){
@@ -97,7 +97,7 @@ export default class AssignTrainingResources extends LightningElement {
 
     handleAssign() {
         const selectedValues = [...this.roleSpecificSelections, ...this.generalSelections];
-        if(selectedValues) {
+        if(selectedValues.length !== 0) {
             assignResources({
                 employeeId: this.recordId,
                 resourceIds: selectedValues

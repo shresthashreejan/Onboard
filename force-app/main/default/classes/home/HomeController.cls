@@ -28,9 +28,10 @@ public with sharing class HomeController {
      * @param userId holds employee's Id
      * @return list of training resources
      */
+    @AuraEnabled
     public static List<Training_Resource__c> fetchTrainingResources(Id employeeId){
         try {
-            return [SELECT Id, Resource__c, Resource__r.Name FROM Training_Resource__c WHERE Employee__c =: employeeId];
+            return [SELECT Id, Resource__c, Resource__r.Name, Employee__r.Name FROM Training_Resource__c WHERE Employee__c =: employeeId];
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }

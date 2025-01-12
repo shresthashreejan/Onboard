@@ -82,9 +82,14 @@ public with sharing class TrainingResource {
     @AuraEnabled
     public static void completeTraining(Id recordId) {
         try {
-            Training_Resource__c rsc = [SELECT Id, Complete__c FROM Training_Resource__c WHERE Id =: recordId];
-            rsc.Complete__c = true;
-            update rsc;
+            Id currentUserId = UserInfo.getUserId();
+            Training_Resource__c rsc = [SELECT Id, Employee__c, Complete__c FROM Training_Resource__c WHERE Id =: recordId];
+            if (rsc.Employee__c == currentUserId) {
+                rsc.Complete__c = true;
+                update rsc;
+            } else {
+                System.assert(false, 'The current user is not the employee associated with this training resource.');
+            }
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
